@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理员修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add_user"></i><em>添加新会员</em></span>
+  </div>
+  <form action="doupdate/id/{$data.id}" method="post">
+  {php}
+   
+
+    $cj=$pt=$jyy='';
+    switch($data['level']){
+    case 0:
+    $cj='checked';
+    break;
+    case 1:
+    $pt='checked';
+    break;
+    case 2:
+    $jyy='checked';
+    break;
+    }
+  {/php}
+  <table class="list-style">
+  <tr>
+    <td style="text-align:right;">会员账号：</td>
+    <td><input type="text" name="name" class="textBox length-middle" value="{$data.name}" /></td>
+   </tr>
+   <tr>
+    <td style="width:15%;text-align:right;">会员昵称：</td>
+    <td><input type="text" name="user" class="textBox length-middle" value="{$data.user}"/></td>
+   </tr>
+   
+   <tr>
+    <td style="text-align:right;">设置密码：</td>
+    <td><input type="password" value="{$data.pwd}" name="pwd" class="textBox length-middle" /></td>
+   </tr>
+    <tr>
+    <td style="text-align:right;">管理员状态：</td>
+    <td>
+    <input name="status" type="radio"  {if condition="$data.status==1"}checked{/if} value='1'>可用&nbsp;&nbsp;&nbsp;
+    <input name="status" type="radio" {if condition="$data.status==0"}checked{/if} value='0'>禁用&nbsp;&nbsp;&nbsp;
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">管理员等级：</td>
+    <td>
+    {volist name='role' id='vo'}
+        <input type="checkbox" value='{$vo.id}' name='rid[]' {if condition="in_array($vo.id,$data.rid)"}checked{/if}>{$vo.name}
+    {/volist}
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" class="tdBtn" value="添加新用户"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>

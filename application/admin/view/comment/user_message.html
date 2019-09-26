@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>会员留言</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>会员留言</em></span>
+  </div>
+    <div class="operate">
+   <form action="com/com" method="get">
+    <select class="inline-select" name="status">
+     <option value="2">选择状态</option>
+    <option value="0">未处理</option>
+    <option value="1">已处理</option>       
+    </select>
+    <input type="text" name="ordno" class="textBox length-long" placeholder="请输入订单号..."/>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+     <th>会员账号</th>
+     <th>评价商品</th>
+     <th>订单编号</th>
+     <th>留言时间</th>
+     <th>评分等级</th>
+     <th>处理状态</th>
+ <!--     <th>留言内容</th>
+     <th>管理员回复</th> -->
+     <th>操作</th>
+   </tr>
+   {volist name='data' id='vo' key='m'}
+   {php}
+       
+        $sta=array(1=>'已处理',0=>'未处理');
+        $lev=array(1=>'好评',2=>'中评',3=>'差评');
+        {/php}
+   <tr>
+    <td class="center">{$vo.username}</td>
+    <td class="center">{$vo.goods_name}</td>
+    <td class="center">{$vo.ordno}</td>
+    <td class="center">{$vo.time}</td>
+    <td class="center">{$lev[$vo.level]}</td>
+    <td class="center">{$sta[$vo.status]}</td>
+    <td class="center">
+     <a href="{:url('com/tocom',['id'=>$vo.id])}" class="inline-block" title="回复"><img src="{$Think.config.__ADMIN__}images/icon_title.gif"/></a>
+    </td>
+   </tr>
+   {/volist}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+{$data->render()}
+	  
+	  </div>
+  </div>
+ </div>
+</body>
+</html>

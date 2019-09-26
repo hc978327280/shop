@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理员回复</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>管理员回复</em></span>
+  </div>
+  
+  <dl>
+   <dt class="R-userTitle">DeathGhost:</dt>
+   <dd class="R-userCont">{$data.comment}</dd>
+   <dt class="R-adminTitle">管理员</dt>
+   {if condition="$data.admin==null"} 
+   <dd class="R-adminCont"></dd>
+   {else /}
+   <dd class="R-adminCont">{$data.admin}</dd>
+   {/if}
+  </dl>
+  <hr/>
+  <form action="{:url('com/docom',['id'=>$data.id])}" method="post">
+  <div>
+   <textarea class="textarea block" style="padding:1em;" name="admin"></textarea>
+   <input type="submit" value="回复 " class="tdBtn" style="margin:8px 0;"/>
+  </div>
+  </form>
+ </div>
+</body>
+</html>

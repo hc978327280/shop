@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1563165644035_1" label="shop" name="shop">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/shop" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1563161443346_0" label="窗口工作集" name="Aggregate for window 1563161443346"/>
+<mruList name="shop"/>
+</workingSetManager>

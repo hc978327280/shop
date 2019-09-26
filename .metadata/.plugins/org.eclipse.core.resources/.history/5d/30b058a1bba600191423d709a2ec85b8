@@ -1,0 +1,87 @@
+<?php
+namespace app\index\controller;
+use think\Controller;
+use think\captcha\Captcha;
+use think\Db;
+class Index extends Controller
+{
+    public function index()
+    {
+        return $this->fetch('login');
+   }
+    public function register(){
+    	return $this->fetch();
+    }
+    //ajax请求短信接口
+    public function sendMess(){
+    	$phone=input('phone');
+    	$templateid='482242';
+    	echo mess($phone,$templateid);
+    }
+    //短信验证码判断
+    public function dophone(){
+    	$yzm=session('yzm');
+		$code=input('code');
+		if($yzm==$code){
+			$arr=array('code'=>0,'msg'=>'验证码正确');
+		}else{
+			$arr=array('code'=>1,'msg'=>'验证码不正确');
+		}
+		echo json_encode($arr);
+    }
+    //自定义验证码图片
+    public function verify(){
+    	$config =    [
+	    // 验证码字体大小
+	    'fontSize'    =>    30,    
+	    // 验证码位数
+	    'length'      =>    4,   
+	    // 关闭验证码杂点
+	    'useNoise'    =>    true, 
+	];
+	$captcha = new Captcha($config);
+	return $captcha->entry(1);
+    }
+    //验证图片验证码
+	  function check_verify(){
+	    $captcha = new Captcha();
+	    $code=input('code');
+	    if ( $captcha->check($code, 1)) {
+	    	echo "验证码正确";
+	    } else {
+	    	echo "验证码不正确";
+	    }
+	    
+	   
+	}
+	//验证用户名正确
+	public function yhm(){
+		$yhm=input('yhm');
+		//2-16位数字或字母、汉字、下划线
+		if (preg_match("/^[A-Za-z0-9_\x{4e00}-\x{9fa5}]+$/u", $yhm)) {
+			$arr=array('code'=>1,'msg'=>'用户名合法');
+			var_dump($arr);
+		} else {
+			$arr=array('code'=>0,'msg'=>'用户名不合法');
+		}
+		echo json_encode($arr);
+		
+	}
+	//提交表单的方法
+	public function submit(){
+		$data['name']=input('name');
+		$data['pwd']=md5(input('pwd').input('code'));
+		$data['code']=input('code');
+		$data['email']=input('email');
+		$data['phone']=input('phone');
+		$data['ctime']=date('Y-m-d H:i:s');
+		//插入数据
+		$res=Db::table('test')->insert($data);
+		if ($res) {
+			$this->success('添加成功','/','',5);
+		} else {
+			$this->error('添加失败');
+		}
+		
+	}
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>产品列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>产品列表</em></span>
+    <span class="modular fr"><a href="{:url('goods/add')}" class="pt-link-btn">+添加商品</a></span>
+  </div>
+  <div class="operate">
+   <form action="goods" method="get">
+    <select class="inline-select" name="is_sale">
+    <option value="2">状态</option>
+     <option value="1">在售</option>
+     <option value="0">下架</option>
+    </select>
+    <input type="text" name="goods_name" class="textBox length-long" placeholder="输入产品名称..."/>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+   <th>选择</th>
+    <th>ID编号</th>
+    <th>商品名称</th>
+    <th>缩略图</th>
+    <th>市场价</th>
+    <th>会员价</th>
+    <th>库存</th>
+    <th>是否在售</th>
+    <th>分类</th>
+    <th>上架时间</th>
+    <th>操作</th>
+   </tr>
+   {volist name="data" id="vo"  empty="暂时没有数据" key="m"}
+   <form action="{:url('Goods/dodel')}" method="post">
+   <tr id="fenye">
+    <td>
+     <span>
+     <input type="checkbox" name="id[]" value="{$vo.id}" class="middle children-checkbox"/>
+     </span>
+    </td>
+    <td class="center">{$m + ($page-1)*20}</td>
+    <td class="center">{$vo.goods_name}</td>
+    <td class="center pic-area"><img style="width: 80px;" src="/uploads/{$vo.slt}" class="thumbnail"/></td>
+    <td class="center">
+     <span>
+      <i>￥</i>
+      <em>{$vo.market_price}</em>
+     </span>
+    </td>
+    <td class="center">
+     <span>
+      <i>￥</i>
+      <em>{$vo.shop_price}</em>
+     </span>
+    </td>
+    <td class="center">
+     <span>
+      <em>{$vo.nums}</em>
+      <i>件</i>
+     </span>
+    </td>
+    <!-- <img src="{$Think.config.__ADMIN__}images/no.gif"/> -->
+    {if condition="$vo.is_sale eq 1"}
+        <td class="center"><img src="{$Think.config.__ADMIN__}images/yes.gif"/></td>
+        {else/}<td class="center"><img src="{$Think.config.__ADMIN__}images/no.gif"/></td>
+    {/if}
+    
+    <td class="center">{$vo.name}</td>
+    <td class="center">{$vo.addtime}</td>
+    <td class="center">
+     <a href="{:url('type',['id'=>$vo.id])}" title="库存/属性添加"><img src="{$Think.config.__ADMIN__}images/icon_view.gif"/></a>
+     <a title="修改属性" href="{:url('typeup',['id'=>$vo.id])}"><img src="{$Think.config.__ADMIN__}images/icon_drop.gif"/></a>
+     <a href="{:url('update',['id'=>$vo.id])}" title="商品编辑"><img src="{$Think.config.__ADMIN__}images/icon_edit.gif"/></a>
+     <a title="删除" href="{:url('del',['id'=>$vo.id])}"><img src="{$Think.config.__ADMIN__}images/icon_trash.gif"/></a>
+    </td>
+   </tr>
+
+{/volist}
+  
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <div class="BatchOperation fl">
+     <label for="del" class="btnStyle middle"  id="all">全选</label>
+     <label for="del" class="btnStyle middle" id="uall">取消全选</label>
+    <input type="submit" value="批量删除" class="btnStyle"/>
+    </div>
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+    {$data->render()}
+     </form>
+</div>
+  </div>
+ </div>
+ <!-- <script>
+      //单击ajak分页
+      $(function(){
+        $('.pagination a').click(function(){
+         var p=$(this).text();
+          $.ajax({
+            url:'index',
+            type:'get',
+            data:{page:p},
+            success:function(data){ 
+              console.log(data);
+
+              $("#fenye").html(data);
+            }
+          })
+        })
+      })
+
+
+ </script> -->
+   <script>
+      $("#all").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",true);
+        });
+        
+      });
+       $("#uall").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",false);
+        });
+        
+      });
+
+    </script>
+</body>
+</html>

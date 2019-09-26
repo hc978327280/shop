@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>订单列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="order"></i><em>订单列表</em></span>
+  </div>
+  <div class="operate">
+   <form action="{:url('orderlist/orderlist')}" method="get">
+    <img src="{$Think.config.__ADMIN__}images/icon_search.gif"/>
+    <input type="text" class="textBox length-long" name="ordno" placeholder="输入订单编号..."/>
+    <select class="inline-select" name="status">
+     <option value="5">选择条件</option>
+      
+     <option value="1">未付款</option>
+     <option value="2">已付款</option>
+    </select>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  </div>
+  <table class="list-style Interlaced">
+  
+   <tr>
+   <th>选择</th>
+   <th>序号</th>
+    <th>订单编号</th>
+    <th>下单时间</th>
+    <th>收件人</th>
+    <th>订单金额</th>
+    <th>订单状态</th>
+    <th>操作</th>
+   </tr>
+      <form action="{:url('/orderlist/dodel')}" method="post" >
+
+   {volist name='data' id='vo' key='m'}
+   {php}
+        $lev=array(1=>'未支付',2=>'待发货',3=>'已发货',4=>'完成',5=>'完成');
+        {/php}
+   <tr>
+   <td>
+       <input type="checkbox" value="{$vo.id}" name="id[]" class="center" />
+   </td>
+    <td class="center">{$m + ($page-1)*20}</td>
+    <td class="center">
+     <a href="order_detail.html">{$vo.ordno}</a>
+    </td>
+    <td class="center">
+     
+     <span class="block">{$vo.ctime}</span>
+    </td>
+    <td width="450" class="center">
+     <span class="block">{$vo.link}[{$vo.phone}]</span>
+     <address>{$vo.pname}{$vo.cname}{$vo.rname}{$vo.streetno}</address>
+    </td>
+    <td class="center">
+     <span><i>￥</i><b>{$vo.money}</b></span>
+    </td>
+    <td class="center">
+     <span>{$lev[$vo.status]}</span>
+    </td>
+    <td class="center">
+     <a href="{:url('orderlist/order',['id'=>$vo.id])}" class="inline-block" title="查看订单"><img src="{$Think.config.__ADMIN__}images/icon_view.gif"/></a>
+     <a class="inline-block" href="{:url('orderlist/del',['id'=>$vo.id])}" title="删除订单"><img src="{$Think.config.__ADMIN__}images/icon_trash.gif"/></a>
+    </td>
+   </tr>
+   {/volist}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <div class="BatchOperation fl">
+     <label for="del" class="btnStyle middle"  id="all">全选</label>
+     <label for="del" class="btnStyle middle" id="uall">取消全选</label>
+    <input type="submit" value="批量删除" class="btnStyle"/>
+    </form>
+    </div>
+    <script>
+      $("#all").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",true);
+        });
+        
+      });
+       $("#uall").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",false);
+        });
+        
+      });
+
+    </script>
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+	     {$data->render()}
+	  </div>
+  </div>
+ </div>
+</body>
+</html>

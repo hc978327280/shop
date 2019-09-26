@@ -1,0 +1,11 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:70:"E:\wamp64\www\TP5\public/../application/index\view\index\con_list.html";i:1562723245;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	dgdfg
+</body>
+</html>

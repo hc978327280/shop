@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+
+		<title>订单管理</title>
+
+		<link href="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
+		<link href="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
+
+		<link href="{$Think.config.__HOME__}css/personal.css" rel="stylesheet" type="text/css">
+		<link href="{$Think.config.__HOME__}css/orstyle.css" rel="stylesheet" type="text/css">
+
+		<script src="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
+		<script src="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/js/amazeui.js"></script>
+
+	</head>
+
+	<body>
+		<!--头 -->
+    {include file="public:header"}
+		
+					</div>
+				</div>
+			</article>
+		</header>
+            <div class="nav-table">
+					   <div class="long-title"><span class="all-goods">全部分类</span></div>
+					   <div class="nav-cont">
+							<ul>
+								<li class="index"><a href="#">首页</a></li>
+                                <li class="qc"><a href="#">闪购</a></li>
+                                <li class="qc"><a href="#">限时抢</a></li>
+                                <li class="qc"><a href="#">团购</a></li>
+                                <li class="qc last"><a href="#">大包装</a></li>
+							</ul>
+						    <div class="nav-extra">
+						    	<i class="am-icon-user-secret am-icon-md nav-user"></i><b></b>我的福利
+						    	<i class="am-icon-angle-right" style="padding-left: 10px;"></i>
+						    </div>
+						</div>
+			</div>
+			<b class="line"></b>
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+
+					<div class="user-order">
+
+						<!--标题 -->
+						<div class="am-cf am-padding">
+							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">订单管理</strong> / <small>Order</small></div>
+						</div>
+						<hr/>
+
+						<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
+
+							<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
+								<li class="am-active"><a href="#tab1">所有订单</a></li>
+								<li><a href="#tab2">待付款</a></li>
+								<li><a href="#tab3">待发货</a></li>
+								<li><a href="#tab4">待收货</a></li>
+								<li><a href="#tab5">待评价</a></li>
+							</ul>
+
+							
+						</div>
+					</div>
+				</div>
+				<!--底部-->
+				<div class="footer">
+					<div class="footer-hd">
+						<p>
+							<a href="#">恒望科技</a>
+							<b>|</b>
+							<a href="#">商城首页</a>
+							<b>|</b>
+							<a href="#">支付宝</a>
+							<b>|</b>
+							<a href="#">物流</a>
+						</p>
+					</div>
+					<div class="footer-bd">
+						<p>
+							<a href="#">关于恒望</a>
+							<a href="#">合作伙伴</a>
+							<a href="#">联系我们</a>
+							<a href="#">网站地图</a>
+							<em>© 2015-2025 Hengwang.com 版权所有</em>
+						</p>
+					</div>
+
+				</div>
+			</div>
+    {include file="public:left"}
+			
+		</div>
+
+	</body>
+
+</html>

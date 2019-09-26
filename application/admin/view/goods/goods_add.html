@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>产品列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>编辑/添加产品</em></span>
+    <span class="modular fr"><a href="product_list.html" class="pt-link-btn">产品列表</a></span>
+  </div>
+  <table class="list-style">
+  <form action="{:url('goods/add')}" method="post" enctype="multipart/form-data">
+   <tr>
+    <td style="text-align:right;width:15%;">产品名称：</td>
+    <td><input type="text" name="goods_name" class="textBox length-long"/></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">产品分类：</td>
+    <td>
+     <select class="textBox" name="type_id">
+     <option value="0">顶级分类</option>
+      {volist name="data" id="vo"  empty="暂时没有数据" }
+      <option value="{$vo.id}">{$vo.newName}</option>
+      {/volist}
+     </select>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">市场价：</td>
+    <td>
+     <input type="text" class="textBox length-short" name="market_price" />
+     <span>元</span>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">会员价：</td>
+    <td>
+     <input type="text" class="textBox length-short" name="shop_price" />
+     <span>元</span>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">商品编号：</td>
+    <td>
+     <input type="text" class="textBox length-short" name="goods_sn" />
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">状态：</td>
+    <td>
+     <input type="checkbox" value="1" id="jingpin" name="is_sale" />
+     <label for="jingpin">在售</label>
+     <input type="checkbox" value="0" id="xinpin" name="is_sale"/>
+     <label for="xinpin">下架</label>
+    </td>
+   </tr>  
+   <tr>
+    <td style="text-align:right;">产品主图：</td>
+    <td>
+      <input type="file" id="pics" name='goods_img[]'>
+      <input type="file" id="pics" name='goods_img[]'>
+      <input type="file" id="pics" name='goods_img[]'>
+      <input type="file" id="pics" name='goods_img[]'>
+    </td>
+   </tr> 
+   <tr>
+    <td style="text-align:right;">产品详情：</td>
+    <td><textarea name="goods_desc" id="editor" type="text/plain" style="width:666px;height:266px;"></textarea></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" value="发布新商品" class="tdBtn"/></td>
+   </tr>
+   </form>
+  </table>
+ </div>
+ <script>
+  var ue = UE.getEditor('editor');
+ </script>
+</body>
+</html>

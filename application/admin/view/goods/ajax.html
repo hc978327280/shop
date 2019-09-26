@@ -1,0 +1,46 @@
+﻿
+   {volist name="data" id="vo"  empty="暂时没有数据" key="m"}
+   <tr id="fenye">
+    <td>
+     <span>
+     <input type="checkbox" class="middle children-checkbox"/>
+     </span>
+    </td>
+    <td class="center">{$vo.id}</td>
+    <td class="center">{$vo.goods_name}</td>
+    <td class="center pic-area"><img style="width: 50px;" src="{$Think.config.__HOME__}images/01.jpg" class="thumbnail"/></td>
+    <td class="center">
+     <span>
+      <i>￥</i>
+      <em>{$vo.market_price}</em>
+     </span>
+    </td>
+    <td class="center">
+     <span>
+      <i>￥</i>
+      <em>{$vo.shop_price}</em>
+     </span>
+    </td>
+    <td class="center">
+     <span>
+      <em>589</em>
+      <i>件</i>
+     </span>
+    </td>
+    <!-- <img src="{$Think.config.__ADMIN__}images/no.gif"/> -->
+    {if condition="$vo.is_sale eq 1"}
+        <td class="center"><img src="{$Think.config.__ADMIN__}images/yes.gif"/></td>
+        {else/}<td class="center"><img src="{$Think.config.__ADMIN__}images/no.gif"/></td>
+    {/if}
+    
+    <td class="center">1</td>
+    <td class="center">{$vo.addtime}</td>
+    <td class="center">
+     <a href="http://www.baidu.com/跳转至前台页面哦" title="查看" target="_blank"><img src="{$Think.config.__ADMIN__}images/icon_view.gif"/></a>
+     <a href="edit_product.html" title="编辑"><img src="{$Think.config.__ADMIN__}images/icon_edit.gif"/></a>
+     <a title="删除"><img src="{$Think.config.__ADMIN__}images/icon_drop.gif"/></a>
+    </td>
+   </tr>
+{/volist}
+  
+  

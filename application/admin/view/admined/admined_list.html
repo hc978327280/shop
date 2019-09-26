@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理员列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>管理员列表</em></span>
+    <span class="modular fr"><a href="adminedadduser" class="pt-link-btn">+添加管理员</a></span>
+  </div>
+  <div class="operate">
+   <form action="admined" method="get">
+    <select class="inline-select" name="grade">
+     <option value="0">选择会员等级</option>
+      {volist name='role' id='vo'}
+                    <option value="{$vo.id}">{$vo.name}</option>
+                    {/volist}
+    </select>
+    <input type="text" name="name" class="textBox length-long" placeholder="输入管理员账号"/>
+    <input type="submit" value="查询" class="tdBtn"/>
+   </form>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+     <th class="center">选择</th>
+     <th class="center">编号</th>
+     <th class="center">管理员账号</th>
+     <th class="center">管理员昵称</th>
+     <th class="center">状态</th>
+     <th class="center">操作</th>
+   </tr>
+   {volist name="data" id="vo"  empty="暂时没有数据" key="m"}
+        {php}
+       
+        $sta=array(1   =>'可用',0=>'禁用');
+        {/php}
+    <form action="dodel" method="post" >
+   <tr>
+    <td>
+     <input type="checkbox" name="id[]" value="{$vo.id}" />
+    </td>
+    <td class="center">
+    {$m + ($page-1)*20}<!--  -->
+    </td>
+    <td class="center">{$vo.name}</td>
+    <td class="center">{$vo.user}</td>
+    <td class="center">{$sta[$vo.status]}</td>
+    <td class="center">
+     <a href="update/id/{$vo.id}" class="inline-block" title="编辑"><img src="{$Think.config.__ADMIN__}images/icon_edit.gif"/></a>
+     <a class="inline-block" title="删除" href="{:url('del',['id'=>$vo.id])}"><img src="{$Think.config.__ADMIN__}images/icon_drop.gif"/></a>
+    </td>
+   </tr>
+   {/volist}
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+	  <div class="BatchOperation fl">
+	   <label for="del" class="btnStyle middle"  id="all">全选</label>
+     <label for="del" class="btnStyle middle" id="uall">取消全选</label>
+    <input type="submit" value="批量删除" class="btnStyle"/>
+	  </div>
+	  <div class="turnPage center fr">
+{$data->render()}
+	  </div>
+    <script>
+      $("#all").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",true);
+        });
+        
+      });
+       $("#uall").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",false);
+        });
+        
+      });
+
+    </script>
+  </div>
+ </div>
+</body>
+</html>

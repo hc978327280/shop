@@ -1,0 +1,15 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:67:"E:\wamp64\www\TP5\public/../application/index\view\test\updata.html";i:1562916449;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改</title>
+</head>
+<body>
+	<form action="<?php echo url('index/Test/doupdata',['id'=>$data['id']]); ?>" method="post">
+		名字：<input type="text" name="name" value="<?php echo $data['name']; ?>"><br>
+		电话：<input type="text" name="phone" value="<?php echo $data['phone']; ?>"><br>
+			<button>修改</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>节点列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>编辑/添加节点</em></span>
+    <span class="modular fr"><a href="product_list.html" class="pt-link-btn">节点列表</a></span>
+  </div>
+  <form action="{:url('auth/addjie')}" method="post">
+  <table class="list-style">
+   <tr>
+    <td style="text-align:right;width:15%;">英文名称：</td>
+    <td><input type="text" name="ename" class="textBox length-long"/></td>
+   </tr>
+    <tr>
+    <td style="text-align:right;width:15%;">中文名称：</td>
+    <td><input type="text" name="cname" class="textBox length-long"/></td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">上一级：</td>
+    <td>
+     <select class="textBox" name="pid">
+      <option value="0">--控制器--</option>
+      {if condition="!empty($control)"}
+      {volist name='control' id='vo'}
+      <option value="{$vo.id}">{$vo.cname}</option>
+      {/volist}
+      {/if}
+     </select>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;width:15%;">备注：</td>
+    <td><input type="text" name="beizhu" name="beizhu" class="textBox length-long"/></td>
+   </tr>
+    <tr>
+    <td style="text-align:right;">是否启用：</td>
+    <td>
+     <input type="radio" name="status" value="1" id="jingpin"/>
+     <label for="jingpin">是</label>
+     <input type="radio" name="status" value="0" id="xinpin"/>
+     <label for="xinpin">否</label>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" value="发布新商品" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>支付页面</title>
+	<link rel="stylesheet" href="{$Think.config.__HOME__}css/pay.css">
+	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+		<link href="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css" />
+		<link href="{$Think.config.__HOME__}AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css" />
+
+		<link href="{$Think.config.__HOME__}basic/css/demo.css" rel="stylesheet" type="text/css" />
+
+		<link href="{$Think.config.__HOME__}css/seastyle.css" rel="stylesheet" type="text/css" />
+
+		<script type="text/javascript" src="{$Think.config.__HOME__}basic/js/jquery-1.7.min.js"></script>
+		<script type="text/javascript" src="{$Think.config.__HOME__}js/script.js"></script>
+</head>
+</head>
+<body>
+		{include file="public:header"}
+
+<!--订单提交-->
+<div class="success">
+	<h2>
+		<div class="state-logo">
+			<img src="{$Think.config.__HOME__}images/dagou.jpg" alt="">
+		</div>
+	<script>
+var c=new Date();
+c.setHours(c.getHours()+1);
+setInterval(function () {
+var nowtime = new Date();
+var time = c - nowtime;
+
+var hour = parseInt(time / 1000 / 60 / 60 % 24);
+var minute = parseInt(time / 1000 / 60 % 60);
+var seconds = parseInt(time / 1000 % 60);
+$('.timespan').html(hour + "小时" + minute + "分钟" + seconds + "秒");
+}, 1000);
+</script>
+		<span class="text">
+		订单提交，请您在
+			<b class="dowm" id="btn">
+				<span class="timespan"></span>
+			<!-- 	<span>29</span>分
+				<span>59</span>秒 -->
+			</b>
+		内完成支付
+		</span>
+	</h2>
+	<p class="amount">
+		应付金额
+		<span>￥</span>
+		<span class="price">{$money}</span>
+	</p>
+	<div class="detail" style="display: block;">
+		<p></p>
+		<li>订单号：{$ordno}</li>
+		<p></p>
+	</div>
+</div>
+<!--支付方式-->
+<div class="pay">
+	<div class="span">请选择支付方式</div>
+	<div class="payment">
+		<h3>支付平台</h3>
+		<ul>
+			<li style="border:none;padding:0;" id="tijiao">
+				<img src="{$Think.config.__HOME__}images/zhifubao1.jpg" alt="">
+			</li>
+		</ul>
+	</div>
+</div>
+<script>
+	$(function(){
+		$('#tijiao img').click(function(){
+			// var money=$('.price').text()
+			// var ordno=$('#detail li').text()
+			location.href="{:url('/pay/update',['money'=>$money,'ordno'=>$ordno])}"
+		})
+	})
+
+</script>
+<!-- <div class="footer" style="text-align: center;">
+						<div class="footer-hd">
+							<p>
+								<a href="#">恒望科技</a>
+								<b>|</b>
+								<a href="#">商城首页</a>
+								<b>|</b>
+								<a href="#">支付宝</a>
+								<b>|</b>
+								<a href="#">物流</a>
+							</p>
+						</div>
+						<div class="footer-bd">
+							<p>
+								<a href="#">关于恒望</a>
+								<a href="#">合作伙伴</a>
+								<a href="#">联系我们</a>
+								<a href="#">网站地图</a>
+								<em>© 2015-2025 Hengwang.com 版权所有</em>
+							</p>
+						</div>
+					</div> -->
+</body>
+</html>

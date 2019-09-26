@@ -1,0 +1,61 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:66:"E:\wamp64\www\TP5\public/../application/index\view\test\shuju.html";i:1562978437;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+	<table border="1px" width="800px" height="200px">
+	<tr>
+		<th>名字</th>
+		<th>密码</th>
+		<th>验证码</th>
+		<th>邮箱</th>
+		<th>电话</th>
+	</tr>
+
+		<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): if( count($data)==0 ) : echo "" ;else: foreach($data as $key=>$vo): ?>
+   
+
+		
+	<tr>
+		<td><input type="text" value="<?php echo $vo['id']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><input type="text" value="<?php echo $vo['name']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><input type="text" value="<?php echo $vo['pwd']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><input type="text" value="<?php echo $vo['code']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><input type="text" value="<?php echo $vo['eamil']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><input type="text" value="<?php echo $vo['phone']; ?>" readonly="readonly" style="border-width:0;"></td>
+		<td><a href="<?php echo url('index/Test/updata',['id'=>$vo['id']]); ?>">修改</a></td>
+		<td><a href="<?php echo url('index/Test/shanchu',['id'=>$vo['id']]); ?>">删除</a></td>
+	</tr>
+<?php endforeach; endif; else: echo "" ;endif; ?>
+	<tr><a href="/chaxun">查询</a></tr>
+	<script type="text/javascript">
+	$(function(){
+		$("input").dblclick(function(){
+			$("input").removeAttr('readonly')
+		})
+		$("input").blur(function(){
+			$("input").attr('readonly','readonly')
+			var idkey=$(this).attr('name').split(',');
+			var id=idkey[1];
+			var key=idkey[0];
+			var valu=$(this).val();
+			$.ajax({
+				url:"/doupdata",
+				type:"post",
+				data:{id:id,zhiduan:key,zhi:valu},
+				dataType:"josn",
+				success:function(data){
+
+				}
+			})
+
+		})
+	})
+
+	</script>
+</body>
+</html>

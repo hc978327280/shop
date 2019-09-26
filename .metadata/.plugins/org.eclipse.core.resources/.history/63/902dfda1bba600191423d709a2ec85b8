@@ -1,0 +1,22 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:68:"E:\wamp64\www\TP5\public/../application/index\view\test\biaodan.html";i:1562841665;}*/ ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>biaodan</title>
+</head>
+<body>
+	<form action="/charu" method="post">
+		名字：<input type="text" name="name"><br>
+		密码：<input type="password" name="pwd"><br>
+		验证码：<input type="text" name="code"><br>
+		邮箱：<input type="text" name="email"><br>
+		电话：<input type="text" name="phone"><br>
+			<input type="submit" value="插入">
+	</form>
+	<hr>
+
+
+</table>
+</body>
+</html>

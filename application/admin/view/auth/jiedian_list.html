@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>节点列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i></i><em>节点列表</em></span>
+    <span class="modular fr"><a href="{:url('auth/addjiedian')}" class="pt-link-btn">+添加节点</a></span>
+  </div>
+ <!--  <div class="operate">
+   <form>
+    <select class="inline-select">
+     <option>A店铺</option>
+     <option>B店铺</option>
+    </select>
+    <input type="text" class="textBox length-long" placeholder="输入产品名称..."/>
+    <input type="button" value="查询" class="tdBtn"/>
+   </form>
+  </div> -->
+  <table class="list-style Interlaced">
+   <tr>
+   <th>选择</th>
+    <th>编号</th>
+    <th>英文名称</th>
+    <th>中文名称</th>
+    <th>类别</th>
+    <th>状态</th>
+    <th>备注</th>
+    <th>操作</th>
+   </tr>
+   {volist name='res' id='vo' key='m'}
+  
+   <tr>
+    <td>
+     <span>
+     <input type="checkbox" value="{$vo.id}" id="id[]" class="middle children-checkbox"/>
+     </span>
+    </td>
+    <td class="center pic-area">{$m + ($page-1)*20}</td>
+    <td class="td-name center">
+      <span class="ellipsis td-name block">{$vo.ename}</span>
+    </td>
+    <td class="td-name center">
+      <span class="ellipsis td-name block">{$vo.cname}</span>
+    </td>
+    <td class="td-name center">
+      <span class="ellipsis td-name block">{if condition="$vo.pid==0"}控制器{else /}方法/操作{/if}</span>
+    </td>
+    
+       {if condition="$vo.status eq 1"}
+        <td class="center"><img src="{$Think.config.__ADMIN__}images/yes.gif"/></td>
+        {else/}<td class="center"><img src="{$Think.config.__ADMIN__}images/no.gif"/></td>
+    {/if}
+      
+   
+     <td class="center">
+     <span>
+     {$vo.beizhu}
+     </span>
+    </td>
+   <!--  
+    <td class="center"><img src="{$Think.config.__ADMIN__}images/yes.gif"/></td>
+    <td class="center"><img src="{$Think.config.__ADMIN__}images/no.gif"/></td>
+    <td class="center"><img src="{$Think.config.__ADMIN__}images/yes.gif"/></td> -->
+    <td class="center">
+     <a href="http://www.baidu.com/跳转至前台页面哦" title="查看" target="_blank"><img src="{$Think.config.__ADMIN__}images/icon_view.gif"/></a>
+     <a href="edit_product.html" title="编辑"><img src="{$Think.config.__ADMIN__}images/icon_edit.gif"/></a>
+     <a title="删除" href="{:url('auth/del',['id'=>$vo.id])}"><img src="{$Think.config.__ADMIN__}images/icon_drop.gif"/></a>
+    </td>
+   </tr>
+  
+  {/volist}
+  
+  </table>
+  <!-- BatchOperation -->
+  <div style="overflow:hidden;">
+      <!-- Operation -->
+    <div class="BatchOperation fl">
+     <label for="del" class="btnStyle middle"  id="all">全选</label>
+     <label for="del" class="btnStyle middle" id="uall">取消全选</label>
+    <input type="submit" value="批量删除" class="btnStyle"/>
+    </div>
+	  <!-- turn page -->
+	  <div class="turnPage center fr">
+	     {$res->render()}
+	  </div>
+  </div>
+ </div>
+ <script>
+      $("#all").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",true);
+        });
+        
+      });
+       $("#uall").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",false);
+        });
+        
+      });
+
+    </script>
+</body>
+</html>

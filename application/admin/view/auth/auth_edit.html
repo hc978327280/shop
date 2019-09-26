@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>节点列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="{$Think.config.__ADMIN__}js/jquery.js"></script>
+<script src="{$Think.config.__ADMIN__}js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>编辑权限</em></span>
+    <span class="modular fr"><a href="product_list.html" class="pt-link-btn">节点列表</a></span>
+  </div>
+  <form action="{:url('auth/xiugai')}" method="post">
+  <table class="list-style" cellspacing="0"   cellpadding="0"   border="0">
+     <tr>
+      <td>角色名：</td>
+      </tr>
+      <tr>
+      <td>
+       <select class="textBox" name="rid">
+
+          <option value="{$info.id}">{$info.name}</option>
+       
+       </select>
+      </td>
+     </tr>
+     <tr>
+        <td>节点列表</td>
+     </tr>
+      {volist name='data' id='vo' key='key'}
+
+          <tr>
+        {if condition="is_numeric($key)"}
+        
+      <td>
+      <input type="checkbox" name="nid[]" value="{$vo.id}" id="jingpin" {if condition="in_array($vo.id,$node)"}checked{/if}/>
+       <label for="jingpin">{$vo.cname}</label>
+      </td>
+      {else /}
+   
+     </tr>
+     <tr>
+      {volist name='vo' id='v'}
+      
+       <td> &nbsp;&nbsp;&nbsp;
+          <input type="checkbox" name="nid[]" value="{$v.id}" id="jingpin" {if condition="in_array($v.id,$node)"}checked{/if}/>
+           <label for="jingpin">{$v.cname}</label>
+          </td>
+            {/volist}
+            
+     </tr>
+    {/if}
+     {/volist}
+     <tr>
+      <td><input type="submit" value="分配权限" class="tdBtn"/></td>
+     </tr>
+     <tr>
+      <td><div style="overflow:hidden;">
+      <!-- Operation -->
+    <div class="BatchOperation fl">
+     <label for="del" class="btnStyle middle"  id="all">全选</label>
+     <label for="del" class="btnStyle middle" id="uall">取消全选</label>
+    </div>
+    <div class="turnPage center fr"></td>
+     </tr>
+  </table>
+  </form>
+ </div>
+  <script>
+      $("#all").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",true);
+        });
+        
+      });
+       $("#uall").click(function(){
+        //获取所有的checkbox
+        var ches=$("input[type='checkbox']");
+        //遍历所有的checkbox,重设选中状态为选中
+        ches.each(function(){
+          $(this).prop("checked",false);
+        });
+        
+      });
+
+    </script>
+</body>
+</html>

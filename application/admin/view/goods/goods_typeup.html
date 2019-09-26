@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>产品列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<link href="{$Think.config.__ADMIN__}style/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>编辑/修改产品</em></span>
+    <span class="modular fr"><a href="product_list.html" class="pt-link-btn">产品列表</a></span>
+  </div>
+  <form action="typeup" method="post">
+  <table class="list-style">
+   <tr>
+    <td style="text-align:right;width:15%;">产品名称：</td>
+    <td>
+     
+
+    <input type="text" value="{$good.goods_name}" class="textBox length-long"/>
+      <input type="hidden"  value="{$good.id}" name="goods_id" />
+
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;">商品属性：</td>
+    <td>
+     <select class="textBox" name="attr_id">
+
+     {volist name="data" id="vo"  empty="暂时没有数据" key="m"}
+      <option value="{$vo.id}">{$vo.attr_value}</option>   
+      {/volist}
+      
+     </select>
+    </td>
+   </tr>
+  </tr>
+
+   <tr>
+    <td style="text-align:right;">商品属性修改：</td>
+    <td>
+     <input type="text" name="attr_value" class="textBox length-short"/>
+    </td>
+
+  </tr>
+  <tr>
+    <td style="text-align:right;">商品库存：</td>
+    <td>
+     <input type="text" name="goods_number" class="textBox length-short"/>
+    </td>
+
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" value="修改" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>
